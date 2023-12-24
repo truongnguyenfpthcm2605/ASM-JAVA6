@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <title>Insert title here</title>
+</head>
+<body>
+<!-- Page Preloder -->
+<div id="preloder">
+    <div class="loader"></div>
+</div>
+
+<!-- Header Section Begin -->
+<header class="header-section">
+    <div class="header-top">
+        <div class="container">
+            <div class="ht-left">
+                <div class="mail-service">
+                    <i class=" fa fa-envelope"></i>
+                    htmobile@gmail.com
+                </div>
+                <div class="phone-service">
+                    <i class=" fa fa-phone"></i>
+                    0999999999
+                </div>
+            </div>
+            <div class="ht-right">
+
+
+
+               <th:block sec:authorize="isAuthenticated()">
+                   <a  class="login-panel"><i class="fa fa-user"></i>[[${#authentication.name}]]</a>
+               </th:block>
+                <th:block  sec:authorize="!isAuthenticated()">
+                    <a th:href="@{/auth/login/form}" class="login-panel"><i class="fa fa-user"></i>Đăng Nhập</a>
+                </th:block>
+
+                <div class="top-social">
+                    <a href="?lang=vi" style="text-decoration: none; font-weight: bold;">
+                        <img alt="" th:src="@{/assets/img/flag-2.jpg}">
+                        VN
+                    </a>
+
+                    <a href="?lang=en" style="text-decoration: none; font-weight: bold;">
+                        <img alt="" th:src="@{/assets/img/flag-1.jpg}">
+                        English</a>
+                </div>
+                <div class="top-social">
+                    <a href="#"><i class="ti-facebook"></i></a>
+                    <a href="#"><i class="ti-twitter-alt"></i></a>
+                    <a href="#"><i class="ti-linkedin"></i></a>
+                    <a href="#"><i class="ti-pinterest"></i></a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="inner-header" style="padding: 20px">
+            <div class="row">
+                <div class="col-lg-2 col-md-2">
+                    <div class="logo" style="margin: 0 ; padding: 0">
+                        <a th:href="@{/index}">
+                            <img th:src="@{/assets/img/logoApp.png}" alt="">
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-7 col-md-7" style="padding: 0">
+                    <form th:action="@{/store/search}" class="row" method="post">
+                        <div class="col-md-9">
+                            <input type="text" class="form-control"
+                                   placeholder="Bạn tìm sản phẩm nào ?" name="search"
+                                   th:value="${keywords}">
+                        </div>
+                        <div class="col-md-3">
+                            <button class="btn btn-dark">
+                                <i class='bx bx-search'></i>Tìm Kiếm
+                            </button>
+                        </div>
+                    </form>
+                </div>
+                <div class="col-lg-3 text-right col-md-3">
+                    <ul class="nav-right">
+                        <li class="heart-icon">
+                            <a href="#">
+                                <i class="icon_heart_alt"></i>
+                                <span>1</span>
+                            </a>
+                        </li>
+                        <li class="cart-icon">
+                            <a th:href="@{/cart/show}">
+                                <i class="icon_bag_alt"></i>
+                                <span>{{cart.getCount()}}</span>
+                            </a>
+
+                        </li>
+
+                        <li ng-if="cart.getAmount() > 0" class="cart-price">{{ cart.getAmount() | currency:"" }}
+                            đ
+                        </li>
+
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="nav-item">
+        <div class="container" style="margin: 0 auto;">
+
+            <nav class="nav-menu mobile-menu" style="width: 100%; ">
+                <ul style="width: 100%;text-align: center;">
+                    <li class="active"><a th:href="@{/index}">Trang Chủ</a></li>
+                    <li><a th:href="@{/store}">Cửa Hàng</a></li>
+                    <li><a th:href="@{/contact}">Liên Hệ</a></li>
+                    <li><a href="">Hỗ Trợ</a></li>
+                    <li><a href="#">Cài Đặt</a>
+                        <th:block  sec:authorize="!isAuthenticated()">
+                            <ul class="dropdown">
+                                <li><a th:href="@{/auth/register/form}">Đăng Ký</a></li>
+                                <li><a th:href="@{/auth/login/form}">Đăng Nhập</a></li>
+                            </ul>
+                        </th:block>
+                        <th:block  sec:authorize="isAuthenticated()">
+                            <ul class="dropdown">
+                                <li><a th:href="@{/auth/register/form}">Đăng Ký</a></li>
+                                <li><a th:href="@{/auth/information}">Thông tin tài khoản</a></li>
+                                <li><a th:href="@{/auth/history}">Lịch sử mua hàng</a></li>
+                                <li><a th:href="@{/auth/logoff}">Đăng Xuất</a></li>
+                            </ul>
+                        </th:block>
+                    </li>
+                    <th:block sec:authorize="hasRole('ROLE_ADMIN')">
+                        <li><a th:href="@{/admin/view}">Quản Trị Viên</a></li>
+                    </th:block>
+
+                </ul>
+            </nav>
+            <div id="mobile-menu-wrap"></div>
+        </div>
+    </div>
+</header>
+<!-- Header End -->
+</body>
+</html>

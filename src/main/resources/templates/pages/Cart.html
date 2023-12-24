@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="~{/layout/layout::dynamic(~{::title},~{::body})}">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<!-- Breadcrumb Section Begin -->
+<div class="breacrumb-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="breadcrumb-text product-more">
+                    <a th:href="@{/index}"><i class="fa fa-home"></i> Trang Chủ</a>
+                    <a  th:href="@{/store}">Cửa Hàng</a>
+                    <span>Giỏ Hàng</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Breadcrumb Section Begin -->
+
+<!-- Shopping Cart Section Begin -->
+<section class="shopping-cart spad">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="cart-table">
+                    <table>
+                        <thead>
+                        <tr>
+                            <th>Image</th>
+                            <th class="p-name">Product Name</th>
+                            <th>Price</th>
+                            <th>Quantity</th>
+                            <th>Total</th>
+                            <th><i class="ti-close"></i></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr ng-repeat="item in cart.items">
+                            <td class="cart-pic first-row"><img th:src="@{/assets/img/products/{{item.imgproduct}} }"  alt=""></td>
+                            <td class="cart-title first-row">
+                                <h5>{{item.title}} </h5>
+                            </td>
+                            <td class="p-price first-row">{{ item.price| currency:"" }}
+                                đ<td>
+                            <td class="qua-col first-row">
+                                <div class="quantity">
+                                    <div class="pro-qty">
+                                        <input type="number" ng-change="cart.saveToLoCalStorage()" ng-model="item.qty" min="1" >
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="total-price first-row">{{ item.price * item.qty | currency:"" }}
+                                đ</td>
+                            <td class="close-td first-row"><a ng-click="cart.remove(item.id)"><i class="ti-close"></i></a></td>
+                        </tr>
+
+                        </tbody>
+                    </table>
+                </div>
+                <div class="row">
+                    <div class="col-lg-4">
+                        <div class="cart-buttons">
+                            <button ng-click="cart.clear()" class="btn btn-danger ">Clear</button>
+                            <a th:href="@{/store}" class="btn btn-warning">Update cart</a>
+                        </div>
+
+                    </div>
+                    <div class="col-lg-4 offset-lg-4">
+                        <div class="proceed-checkout">
+                            <ul>
+
+                                <li ng-if="cart.getAmount() > 0" class="cart-total">Total <span>{{ cart.getAmount() | currency:"" }} đ</span></li>
+                            </ul>
+                            <a ng-click="pay()" class="proceed-btn btn-success">Thanh Toán</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Shopping Cart Section End -->
+</body>
+</html>

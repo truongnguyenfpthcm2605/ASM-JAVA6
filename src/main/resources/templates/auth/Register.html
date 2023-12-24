@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="~{/layout/layout::dynamic(~{::title},~{::body})}">
+<head>
+    <meta charset="UTF-8">
+    <title>Đăng Ký</title>
+</head>
+<body>
+<!-- Breadcrumb Section Begin -->
+<div class="breacrumb-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="breadcrumb-text">
+                    <a th:href="@{/index}"><i class="fa fa-home"></i> Trang chủ</a> <span>Đăng
+							ký</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Breadcrumb Form Section Begin -->
+
+<!-- Register Section Begin -->
+<div class="register-login-section spad">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 offset-lg-3" style="margin: 0 auto;">
+                <div class="register-form">
+                    <h2>Đăng Ký</h2>
+                    <form th:action="@{/auth/register}" th:object="${account}" method="post">
+                        <h3 style="color: #1c7430">Thông Tin</h3> <hr>
+                        <div class="row" style="margin-bottom: 10px">
+                            <div class="col-md-8">
+                                <label>Email *</label>
+                                <input type="text" th:field="*{email}" onblur="check()"
+                                       id="email" class="form-control" placeholder="Nhập email"/>
+                            </div>
+                            <div class="col-md-4">
+                                <label>Lấy mã xác nhận *</label> <a
+                                    class="btn btn-light disabled " id="sendButton" style="width: 100%">Gửi</a>
+                            </div>
+                            <span th:errors="*{email}" style="color:red ;margin-left:12px"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Họ Và Tên *</label>
+                            <input type="text" th:field="*{fullname}" class="form-control"
+                                        placeholder="Nhập họ và tên"/>
+                            <span th:errors="*{fullname}" style="color:red"> </span>
+                        </div>
+                        <div class="form-group">
+                            <label>Số điện thoại *</label>
+                            <input type="text" th:field="*{phoneNumbers}" class="form-control"
+                                   placeholder="Nhập số điện thoai"/>
+                            <span th:errors="*{phoneNumbers}" style="color:red"> </span>
+                        </div>
+
+                        <div class="form-group">
+                            <label >Giới tính *</label>
+                            <select  th:field="*{gender}" class="form-control">
+                                <option th:value="true">Nam</option>
+                                <option th:value="false">Nữ</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Địa chỉ *</label>
+                            <textarea cols="10" rows="5" th:field="*{address}" class="form-control"
+                                      placeholder="Nhập Địa Chỉ"></textarea>
+                            <span th:errors="*{address}" style="color:red"> </span>
+                        </div>
+                        <h3 style="color: #721c24">Bảo Mật</h3> <hr>
+                        <div class="row" style="margin-bottom: 10px">
+                            <div class="col-md-10">
+                                <label>Mật Khẩu *</label>
+                                <input type="password" th:field="*{password}" th:value="${password}"
+                                            id="password" class="form-control"/>
+                            </div>
+                            <div class="col-md-2">
+                                <label> Xem</label>
+                                <button type="button"
+                                        class="btn btn-light " id="show1" onclick="showPassword()" style="width: 100%">
+                                    <i class='bx bx-show'></i></button>
+                            </div>
+                            <span th:errors="*{password}" style="color:red ;margin-left:20px"><span>
+                        </div>
+                        <div class="row" style="margin-bottom: 10px">
+                            <div class="col-md-10">
+                                <label>Xác Nhận *</label>
+                                <input type="password"
+                                            id="confirm" name="confirm" class="form-control"/>
+                            </div>
+                            <div class="col-md-2">
+                                <label> Xem</label>
+                                <button type="button"
+                                        class="btn btn-light " id="show2" onclick="showConfirm()" style="width: 100%">
+                                    <i class='bx bx-show'></i>
+                                </button>
+                            </div>
+                            <span style="color:red ; margin-left: 20px" th:text="${cofirmError }"></span>
+                        </div>
+                        <div class="form-group">
+                            <label >Mã xác nhận *</label>
+                            <input type="text"  class="form-control" name="keyemail"
+                                        placeholder="Nhập mã xác nhận từ email"/>
+
+                            <span style="color:red ;" th:text="${keyError }"></span>
+                        </div>
+                        <p style="color: red; font-weight: bold" th:text="${message}"></p>
+                        <button type="submit" class="site-btn register-btn">Đăng
+                            Ký
+                        </button>
+                    </form>
+                    <div class="switch-login">
+                        <a th:href="@{/auth/login/form}" class="or-login">hoặc đăng nhập tại đây</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Register Form Section End -->
+<script>
+    function check() {
+        let emailInput = document.getElementById("email");
+        let sendButton = document.getElementById("sendButton");
+        if (emailInput.value.trim() !== "") {
+            sendButton.classList.remove("disabled");
+        } else {
+            sendButton.classList.add("disabled");
+        }
+    }
+
+    function showPassword() {
+        let passwordField = document.getElementById("password");
+        let showPasswordButton = document.getElementById("show1");
+        if (passwordField.type === "password") {
+            passwordField.type = "text";
+            showPasswordButton.innerHTML = "<i class='bx bx-low-vision'></i>";
+        } else {
+            passwordField.type = "password";
+            showPasswordButton.innerHTML = "<i class='bx bx-show-alt'></i>";
+        }
+    }
+
+    function showConfirm() {
+        let passwordField = document.getElementById("confirm");
+        let showPasswordButton = document.getElementById("show2");
+        if (passwordField.type === "password") {
+            passwordField.type = "text";
+            showPasswordButton.innerHTML = "<i class='bx bx-low-vision'></i>";
+        } else {
+            passwordField.type = "password";
+            showPasswordButton.innerHTML = "<i class='bx bx-show-alt'></i>";
+        }
+    }
+
+
+</script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $("#sendButton").click(function (event) {
+        event.preventDefault();
+        let email = $("#email").val();
+        $.ajax({
+            url: "/auth/register/mail?codemail=" + email,
+            type: 'GET',
+            success: function (data) {
+                alert(data);
+            },
+            error: function (xhr, status, error) {
+                console.log(error)
+            }
+        });
+    });
+</script>
+
+</body>
+</html>

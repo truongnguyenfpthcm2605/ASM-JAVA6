@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="~{/layout/layout::dynamic(~{::title},~{::body})}">
+<head>
+    <meta charset="UTF-8">
+    <title>Đăng Nhập</title>
+</head>
+<body>
+<div class="breacrumb-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="breadcrumb-text">
+                    <a th:href="@{/index}"><i class="fa fa-home"></i> Trang chủ</a>
+                    <span>Đăng nhập</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Breadcrumb Form Section Begin -->
+
+<!-- Register Section Begin -->
+<div class="register-login-section spad">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6 offset-lg-3">
+                <div class="login-form">
+                    <h2>Đăng Nhập</h2>
+                    <form th:action="@{/auth/login}" method="post">
+                        <div class="group-input">
+                            <label >Email *</label>
+                            <input type="email" id="email" name="username">
+                        </div>
+                        <div class="group-input">
+                            <label >Mật khẩu *</label>
+                            <input type="password" id="password" name="password">
+                        </div>
+                        <div class="group-input gi-check">
+                            <div class="gi-more">
+                                <label for="save-pass">
+                                    Lưu mật khẩu?
+                                    <input type="checkbox" id="save-pass" name="remember" value="true">
+                                    <span class="checkmark"></span>
+                                </label>
+                                <a href="#" class="forget-pass">Quên mật khẩu?</a>
+                            </div>
+                        </div>
+                        <p style="color: red; font-size: 15px" th:text="${message}"></p>
+                        <button type="submit" class="site-btn login-btn">Đăng Nhập</button>
+                    </form>
+
+                    <div class="container social-login" style="display: flex; margin-top: 10px; justify-content: center; flex-direction: column; align-items: center"  >
+                            <a th:href="@{/oauth2/authorization/google}" style="background-color: #EA4335; color: white; " class="btn"><i class='bx bxl-google'></i>Login with Google</a>
+                             <a th:href="@{/oauth2/authorization/facebook}" style="background-color:#3B5998 ; color: white" class="btn"><i class='bx bxl-facebook-circle' ></i>Login with Facebook</a>
+                            <a th:href="@{/oauth2/authorization/github}" class="btn"><i class='bx bxl-github'></i>Login with Github</a>
+                    </div>
+                    <div class="switch-login">
+                        <a href="/register" class="or-login">Hoặc Tạo Tài Khoản Tại Đây</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

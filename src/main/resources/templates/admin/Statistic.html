@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="~{/admin/home.html::dynamic(~{::title},~{::main})}">
+<head>
+    <meta charset="UTF-8">
+    <title>Thống Kê</title>
+</head>
+<body >
+<div class="main" th:fragment="main" ng-controller="overview" >
+    <div class="topbar">
+        <div class="toggle">
+            <i class='bx bx-list-ul'></i>
+        </div>
+
+
+    </div>
+
+    <!-- ======================= Cards ================== -->
+    <div class="cardBox">
+        <div class="card">
+            <div>
+                <div class="numbers">1,504</div>
+                <div class="cardName">Đơn hàng Đã Bán</div>
+            </div>
+
+            <div class="iconBx">
+                <i class='bx bx-show'></i>
+            </div>
+        </div>
+
+        <div class="card">
+            <div>
+                <div class="numbers">80</div>
+                <div class="cardName">Sản Phẩm Đã Bán</div>
+            </div>
+
+            <div class="iconBx">
+                <i class='bx bx-line-chart'></i>
+            </div>
+        </div>
+
+        <div class="card">
+            <div>
+                <div class="numbers">284</div>
+                <div class="cardName">Doanh Thu</div>
+            </div>
+
+            <div class="iconBx">
+                <i class='bx bx-circle-three-quarter'></i>
+            </div>
+        </div>
+
+        <div class="card">
+            <div>
+                <div class="numbers">$7,842</div>
+                <div class="cardName">Lượt Truy Cập</div>
+            </div>
+
+            <div class="iconBx">
+                <i class='bx bx-cart-download'></i>
+            </div>
+        </div>
+    </div>
+
+    <!-- ================ Order Details List ================= -->
+    <div class="details">
+        <div class="recentOrders">
+            <div class="cardHeader">
+                <h2>Tổng Quát</h2>
+                <a  class="btn">View All</a>
+            </div>
+
+            <table>
+                <thead>
+                <tr>
+                    <td>No</td>
+                    <td>Tên sản phẩm</td>
+                    <td>Giá tiền</td>
+                    <td>Số lượng</td>
+                    <td>Tổng tiền</td>
+                </tr>
+                </thead>
+
+                <tbody>
+                <tr ng-repeat="item in listOverview">
+                    <td>{{$index}}</td>
+                    <td>{{item[0]}}</td>
+                    <td>{{ item[1]| currency:"" }}
+                        đ</td>
+                    <td>{{item[2]}}</td>
+                    <td>{{ item[3]| currency:"" }}
+                        đ</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- ================= New Customers ================ -->
+        <div class="recentCustomers">
+            <div class="cardHeader">
+                <h2>Recent Customers</h2>
+            </div>
+
+            <table>
+                <tr>
+                    <td width="60px">
+                        <div class="imgBx"><img th:src="@{assets/img/customer02.jpg}" alt=""></div>
+                    </td>
+                    <td>
+                        <h4>David <br> <span>Italy</span></h4>
+                    </td>
+                </tr>
+
+
+            </table>
+        </div>
+    </div>
+</div>
+</body>
+</html>

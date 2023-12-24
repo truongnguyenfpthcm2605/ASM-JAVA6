@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div class="navigation" th:fragment="navbar">
+    <ul>
+        <li>
+            <a href="#">
+                        <span class="icon">
+                           <i style=" font-size: 1.75rem;" class='bx bx-devices'></i>
+                        </span>
+                <span class="title">HTMobile</span>
+            </a>
+        </li>
+
+        <li>
+            <a href="#" class="active">
+                        <span class="icon">
+                           <i style=" font-size: 1.75rem;" class='bx bxs-objects-vertical-bottom'></i>
+                        </span>
+                <span class="title">Tổng Quan</span>
+            </a>
+        </li>
+
+        <li>
+            <a href="./m.html">
+                        <span class="icon">
+                           <i style=" font-size: 1.75rem;"  class='bx bxl-microsoft-teams'></i>
+                        </span>
+                <span class="title">Quản Lí Thành Viên</span>
+            </a>
+        </li>
+        <li>
+            <a href="#">
+                        <span class="icon">
+                            <i style=" font-size: 1.75rem;" class='bx bxs-data'></i>
+                        </span>
+                <span class="title">Quản Lí Sản Phẩm</span>
+            </a>
+        </li>
+        <li>
+            <a href="./m.html">
+                        <span class="icon">
+                            <i style=" font-size: 1.75rem;" class='bx bx-calendar-check'></i>
+                        </span>
+                <span class="title">Quản Lí Đơn Hàng</span>
+            </a>
+        </li>
+        <li>
+            <a href="#">
+                        <span class="icon">
+                            <i style=" font-size: 1.75rem;" class='bx bxs-gift'></i>
+                        </span>
+                <span class="title">Quản Lí Quà Tặng</span>
+            </a>
+        </li>
+
+        <li>
+            <a th:href="@{/auth/logoff}">
+                        <span class="icon">
+                            <i style=" font-size: 1.75rem;" class='bx bx-power-off'></i>
+                        </span>
+                <span class="title">Đăng Xuất</span>
+            </a>
+        </li>
+    </ul>
+</div>
+</body>
+</html>

@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="~{/layout/layout::dynamic(~{::title},~{::body})}"
+      xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>Mua hàng</title>
+</head>
+<body>
+<div class="breacrumb-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="breadcrumb-text product-more">
+                    <a th:href="@{/index}"><i class="fa fa-home"></i> Trang Chủ</a> <span>Đơn Hàng</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Breadcrumb Section Begin -->
+
+<!-- Shopping Cart Section Begin -->
+<section class="checkout-section spad">
+    <div class="container">
+        <form th:action="@{/cart/order/pay}" class="checkout-form"  method="post">
+            <div class="row">
+                <div class="col-lg-6">
+
+                    <h4>Thông tin khách hàng</h4>
+
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <label>Họ Và Tên<span>*</span></label>
+                            <input type="text" id="name-order" th:value="${#authentication.getPrincipal()!=null ? #authentication.name : session.account.fullname}" disabled="disabled"/>
+                        </div>
+                        <div class="col-lg-12">
+                            <label>Email<span>*</span></label>
+                            <input type="text" id="email-order" th:value="${session.account.email}" disabled="disabled">
+                        </div>
+                        <div class="col-lg-12">
+                            <label>Số Điện Thoại</label>
+                            <input type="number" ng-model="Order.phoneNumbers" style=" margin-bottom: 5px;" />
+
+                        </div>
+                        <div class="col-lg-12">
+                            <label>Địa Chỉ Nhận Hàng</label>
+                            <input type="text" style=" margin-bottom: 5px;" ng-model="Order.address"/>
+
+                        </div>
+
+                        <div class="col-lg-12">
+                            <label>Thông Tin Thêm</label>
+                            <textarea cols="10" rows="5" ng-model="Order.description" class="form-control" style=" margin-bottom: 5px;"></textarea>
+
+                        </div>
+
+
+                    </div>
+                </div>
+                <div class="col-lg-6">
+
+                    <div class="place-order">
+                        <h4>Sản Phẩm</h4>
+                        <div class="order-total">
+                            <ul class="order-table" >
+                                <li>Product <span>Total</span></li>
+
+
+                                <li class="fw-normal" ng-repeat="item in cart.items">{{item.title}}  x  {{item.qty}}</li>
+
+                                <li class="fw-normal">Tổng số lượng : {{ cart.getCount()}} sản pẩm</li>
+                                <li class="fw-normal">Tổng Tiền Phải Trả : {{ cart.getAmount() | currency:"" }} đ</li>
+                            </ul>
+                            <div class="payment-check">
+                                <div class="pc-item">
+                                    <label for="pc-check"> Thanh toán khi nhận hàng (Tiền
+                                        mặt) <input type="checkbox" id="pc-check"> <span
+                                                class="checkmark"></span>
+                                    </label>
+                                </div>
+                                <div class="pc-item">
+                                    <label for="pc-paypal"> Thanh toán qua tính dụng <input
+                                            type="checkbox" id="pc-paypal"> <span
+                                            class="checkmark"></span>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="order-btn">
+                                <button type="button" ng-click="Order.purchase()"   class="site-btn place-btn">Đặt
+                                    Hàng
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+
+    </div>
+</section>
+</body>
+</html>

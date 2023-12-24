@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en"  xmlns:th="http://www.thymeleaf.org"  th:replace="~{/layout/layout::dynamic(~{::title},~{::body})}">
+<head>
+    <meta charset="UTF-8">
+    <title>Thư Cảm Ơn</title>
+</head>
+<body>
+
+<div class="container">
+    <h1 style="color: #080202; font-size: 50px; font-weight: 400;">
+        Cảm ơn bạn đã ủng hộ chúng tôi .
+        <p style="font-size: 30px; color: #C38154;">
+            Đơn hàng của bạn đã được chúng tôi xác nhận . Bạn có thể kiểm tra
+            mail <i style="font-size: 40px; color: #41644A;"
+                    class='bx bx-mail-send'></i> để xem đơn hàng của mình.
+        </p>
+    </h1>
+
+    <div
+            style="background-color: #C38154; width: 60%; height: 10px; margin: 30px auto; border-radius: 10px; box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;"></div>
+
+    <div class="container" style="margin: 0 auto; text-align: center;">
+        <img th:src="@{/assets/img/thanks.png}" alt="">
+    </div>
+    <a th:href="@{/index}" style="text-decoration: none; ">Quay về trang chủ</a>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:fragment="dynamic(title, body)">
+<head>
+    <meta charset="UTF-8">
+    <title th:replace="${title}">eStore</title>
+    <link rel="stylesheet" th:href="@{/assets/css/styleadmin.css}" type="text/css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.8.2/angular.min.js"></script>
+</head>
+<body ng-app="admin" >
+      <div class="containers">
+          <div th:replace="~{/layout/navbar.html :: navbar}"></div>
+          <div th:replace="${body}"></div>
+          <h1 ng-model="name"></h1>
+      </div>
+      <script>
+          let app = angular.module("admin",[])
+          app.controller("overview", function ($scope, $http){
+              $scope.listOverview = []
+              $scope.load = function () {
+                  $http.get('/rest/api/statistic')
+                      .then(resp => {
+                          $scope.listOverview = resp.data;
+                          console.log(resp.data)
+                      })
+                      .catch(error =>{
+                          console.log(error)
+                      })
+              }
+              $scope.load()
+          })
+
+      </script>
+
+      <script th:src="@{/assets/js/mainadmin.js}"></script>
+</body>
+</html>
